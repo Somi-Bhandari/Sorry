@@ -39,6 +39,30 @@ color:white;
 text-shadow:0 0 10px rgba(0,0,0,0.4);
 }
 
+/* typing message */
+
+#message{
+margin-top:30px;
+font-size:24px;
+max-width:750px;
+text-align:center;
+line-height:1.6;
+min-height:120px;
+}
+
+.cursor{
+display:inline-block;
+width:3px;
+background:white;
+margin-left:4px;
+animation:blink 1s infinite;
+}
+
+@keyframes blink{
+0%,50%,100%{opacity:1}
+25%,75%{opacity:0}
+}
+
 /* floating hearts */
 
 .bg span{
@@ -62,6 +86,8 @@ opacity:0.7;
 <h1>For My Princess ❤️</h1>
 
 <div id="heart"></div>
+
+<div id="message"></div>
 
 <div class="bg">
 <span style="left:10%">❤️</span>
@@ -119,10 +145,50 @@ requestAnimationFrame(draw)
 
 draw()
 
+/* typing sentences */
+
+const sentences = [
+"You are my strong lady, and even in difficult moments your strength shines beautifully.",
+"Your courage and spirit inspire me more than words can ever express.",
+"Even when you feel weak today, remember that your heart is incredibly powerful.",
+"Take your time to rest and recover, my princess, because you deserve peace and care.",
+"The world becomes brighter every time your beautiful smile returns.",
+"I am always here cheering for you and wishing you a fast and healthy recovery."
+]
+
+const message = document.getElementById("message")
+
+let s = 0
+let c = 0
+
+function type(){
+
+if(s < sentences.length){
+
+if(c < sentences[s].length){
+
+message.innerHTML = sentences[s].substring(0,c+1) + '<span class="cursor"></span>'
+c++
+setTimeout(type,40)
+
+}else{
+
+message.innerHTML += "<br><br>"
+s++
+c = 0
+setTimeout(type,800)
+
+}
+
+}
+
+}
+
+type()
+
 </script>
 
 </body>
 </html>
-
 
 
